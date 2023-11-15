@@ -95,6 +95,8 @@ namespace Zutatensuppe.DiabloInterface.Plugin.HttpClient
         {
             if (SendingDataRead) return;
 
+          
+            // Use the combined list of all quests for the FromDataReadEventArgs method
             var newData = RequestBody.FromDataReadEventArgs(e, di);
             var diff = RequestBody.GetDiff(newData, PrevData);
 

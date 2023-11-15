@@ -9,6 +9,15 @@ using Zutatensuppe.DiabloInterface.Lib;
 
 namespace DiabloInterface.Plugin.HttpClient
 {
+    // Class to hold quest completion details
+    public class QuestCompletionDetails
+    {
+        public QuestId Id { get; set; }
+        public string Name { get; set; }
+        public ushort CompletionBits { get; set; }
+        public bool IsCompleted { get; set; }
+        public List<int> CompletedBits { get; set; }
+    }
     class RequestBody
     {
         private static readonly List<string> AutocompareProps = new List<string> {
@@ -46,8 +55,10 @@ namespace DiabloInterface.Plugin.HttpClient
             "IncreasedAttackSpeed",
             "MagicFind",
             "DamageMax",
+            "Defense",
             "VelocityPercent",
             "AttackRating",
+            "AllQuestsDetails",
         };
 
         public string Event { get; private set; }
@@ -90,6 +101,7 @@ namespace DiabloInterface.Plugin.HttpClient
         public int? FasterRunWalk { get; set; }
         public int? IncreasedAttackSpeed { get; set; }
         public int? DamageMax { get; set; }
+        public int? Defense { get; set; }
         public int? AttackRating { get; set; }
         public int? VelocityPercent { get; set; }
         public int? MagicFind { get; set; }
@@ -99,6 +111,9 @@ namespace DiabloInterface.Plugin.HttpClient
         public List<SkillInfo> Skills { get; set; }
         public Dictionary<GameDifficulty, List<QuestId>> Quests { get; set; }
         public Dictionary<GameDifficulty, List<QuestId>> CompletedQuests { get; set; }
+
+        public List<QuestCompletionDetails> AllQuestsDetails { get; set; }
+
 
         public HirelingDiff Hireling { get; set; }
 
@@ -110,8 +125,39 @@ namespace DiabloInterface.Plugin.HttpClient
         [JsonConverter(typeof(DIApplicationInfoConverter))]
         public IApplicationInfo DIApplicationInfo { get; set; }
 
+
+        private static bool IsBitSet(ushort questBits, int bit)
+        {
+            return (questBits & (1 << bit)) != 0;
+        }
+
+
         public static RequestBody FromDataReadEventArgs(DataReadEventArgs e, IDiabloInterface di)
         {
+            // Get only the quests for the current difficulty.
+            var questsForCurrentDifficulty = e.Quests.ByDifficulty(e.Game.Difficulty);
+
+            // Create a list of quest details for current difficulty.
+            var questDetailsForCurrentDifficulty = questsForCurrentDifficulty
+                .Select(quest => new
+                {
+                    Name = quest.Name,
+                    CompletedBits = Enumerable.Range(0, 16)
+                        .Where(bitIndex => IsBitSet(quest.CompletionBits, bitIndex))
+                        .ToList()
+                })
+                .Where(q => q.CompletedBits.Count > 0) // Filter out quests with no completed bits.
+                .ToList();
+
+            // Transform into QuestCompletionDetails for the JSON output.
+            var allQuestsDetails = questDetailsForCurrentDifficulty.Select(q => new QuestCompletionDetails
+            {
+                Name = q.Name,
+                CompletedBits = q.CompletedBits
+            }).ToList();
+
+
+
             return new RequestBody()
             {
                 Event = "DataRead",
@@ -154,6 +200,7 @@ namespace DiabloInterface.Plugin.HttpClient
                 AttackRating = e.Character.AttackRating,
                 DamageMax = e.Character.DamageMax,
                 MagicFind = e.Character.MagicFind,
+                Defense = e.Character.Defense,
                 Items = e.Character.Items,
                 Skills = e.Character.Skills,
                 Quests = e.Quests.CompletedQuestIds,
@@ -176,6 +223,8 @@ namespace DiabloInterface.Plugin.HttpClient
                 KilledMonsters = e.KilledMonsters,
                 D2ProcessInfo = e.ProcessInfo,
                 DIApplicationInfo = di.appInfo,
+                AllQuestsDetails = allQuestsDetails,
+
             };
         }
 
@@ -192,7 +241,8 @@ namespace DiabloInterface.Plugin.HttpClient
         public static RequestBody GetDiff(
             RequestBody curr,
             RequestBody prev
-        ) {
+)
+        {
             var diff = new RequestBody();
 
             // TODO: while this check is correct, D2DataReader should probably
@@ -220,6 +270,15 @@ namespace DiabloInterface.Plugin.HttpClient
                     hasDiff = true;
                     property.SetValue(diff, newValue);
                 }
+            }
+
+            // Compare AllQuestsDetails using the custom comparer.
+            if (curr.AllQuestsDetails != null &&
+                (prev.AllQuestsDetails == null ||
+                 !curr.AllQuestsDetails.SequenceEqual(prev.AllQuestsDetails, new QuestCompletionDetailsComparer())))
+            {
+                diff.AllQuestsDetails = curr.AllQuestsDetails;
+                hasDiff = true;
             }
 
             var itemsDiff = DiffUtil.ItemsDiff(curr.Items, prev.Items);
@@ -350,6 +409,35 @@ namespace DiabloInterface.Plugin.HttpClient
         public override bool CanRead
         {
             get { return false; }
+        }
+    }
+    // A comparer class to determine if two instances of QuestCompletionDetails are equal.
+    class QuestCompletionDetailsComparer : IEqualityComparer<QuestCompletionDetails>
+    {
+        public bool Equals(QuestCompletionDetails x, QuestCompletionDetails y)
+        {
+            // Check whether the objects are the same object.
+            if (Object.ReferenceEquals(x, y)) return true;
+
+            // Check whether the quest details' properties are equal.
+            return x != null && y != null &&
+                   x.Id == y.Id &&
+                   x.Name == y.Name &&
+                   x.CompletionBits == y.CompletionBits &&
+                   x.IsCompleted == y.IsCompleted &&
+                   x.CompletedBits.SequenceEqual(y.CompletedBits);
+        }
+
+        public int GetHashCode(QuestCompletionDetails obj)
+        {
+            // Get the hash code for the Name field if it is not null.
+            int hashName = obj.Name == null ? 0 : obj.Name.GetHashCode();
+
+            // Get the hash code for the CompletedBits field.
+            int hashCompletedBits = obj.CompletedBits.GetHashCode();
+
+            // Calculate the hash code for the product.
+            return hashName ^ hashCompletedBits;
         }
     }
 }

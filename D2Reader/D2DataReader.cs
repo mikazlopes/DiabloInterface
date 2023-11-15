@@ -32,12 +32,14 @@ namespace Zutatensuppe.D2Reader
             ProcessInfo processInfo,
             Game game,
             List<Monster> killedMonsters
-        ) {
+        )
+        {
             ProcessInfo = processInfo;
             Character = game.Character;
             Game = game;
             Quests = game.Quests;
             KilledMonsters = killedMonsters;
+
         }
 
         public ProcessInfo ProcessInfo { get; }

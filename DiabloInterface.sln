@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31025.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloInterface", "DiabloInterface\DiabloInterface.csproj", "{25BB3310-9BD7-4234-AF7D-9F7FB6870A20}"
 EndProject
@@ -125,7 +125,6 @@ Global
 		{6EA6B43B-B3CF-427E-9B28-C8736496CB9E}.Debug|x86.ActiveCfg = Debug|x86
 		{6EA6B43B-B3CF-427E-9B28-C8736496CB9E}.Debug|x86.Build.0 = Debug|x86
 		{6EA6B43B-B3CF-427E-9B28-C8736496CB9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6EA6B43B-B3CF-427E-9B28-C8736496CB9E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6EA6B43B-B3CF-427E-9B28-C8736496CB9E}.Release|x64.ActiveCfg = Release|x64
 		{6EA6B43B-B3CF-427E-9B28-C8736496CB9E}.Release|x64.Build.0 = Release|x64
 		{6EA6B43B-B3CF-427E-9B28-C8736496CB9E}.Release|x86.ActiveCfg = Release|x86
@@ -137,7 +136,6 @@ Global
 		{30DA147B-6D77-406E-8C08-0137105D1AED}.Debug|x86.ActiveCfg = Debug|x86
 		{30DA147B-6D77-406E-8C08-0137105D1AED}.Debug|x86.Build.0 = Debug|x86
 		{30DA147B-6D77-406E-8C08-0137105D1AED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30DA147B-6D77-406E-8C08-0137105D1AED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30DA147B-6D77-406E-8C08-0137105D1AED}.Release|x64.ActiveCfg = Release|x64
 		{30DA147B-6D77-406E-8C08-0137105D1AED}.Release|x64.Build.0 = Release|x64
 		{30DA147B-6D77-406E-8C08-0137105D1AED}.Release|x86.ActiveCfg = Release|x86
@@ -149,7 +147,6 @@ Global
 		{7095BFA3-857A-4491-879F-B7D863E327E1}.Debug|x86.ActiveCfg = Debug|x86
 		{7095BFA3-857A-4491-879F-B7D863E327E1}.Debug|x86.Build.0 = Debug|x86
 		{7095BFA3-857A-4491-879F-B7D863E327E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7095BFA3-857A-4491-879F-B7D863E327E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7095BFA3-857A-4491-879F-B7D863E327E1}.Release|x64.ActiveCfg = Release|x64
 		{7095BFA3-857A-4491-879F-B7D863E327E1}.Release|x64.Build.0 = Release|x64
 		{7095BFA3-857A-4491-879F-B7D863E327E1}.Release|x86.ActiveCfg = Release|x86
@@ -161,7 +158,6 @@ Global
 		{9D7AB953-19E0-46F6-A400-E3420C1E8905}.Debug|x86.ActiveCfg = Debug|x86
 		{9D7AB953-19E0-46F6-A400-E3420C1E8905}.Debug|x86.Build.0 = Debug|x86
 		{9D7AB953-19E0-46F6-A400-E3420C1E8905}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D7AB953-19E0-46F6-A400-E3420C1E8905}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D7AB953-19E0-46F6-A400-E3420C1E8905}.Release|x64.ActiveCfg = Release|x64
 		{9D7AB953-19E0-46F6-A400-E3420C1E8905}.Release|x64.Build.0 = Release|x64
 		{9D7AB953-19E0-46F6-A400-E3420C1E8905}.Release|x86.ActiveCfg = Release|x86
@@ -197,7 +193,6 @@ Global
 		{43007479-0D82-49A6-92A4-3A8386E106CC}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{43007479-0D82-49A6-92A4-3A8386E106CC}.Debug|x86.Build.0 = Debug|Any CPU
 		{43007479-0D82-49A6-92A4-3A8386E106CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43007479-0D82-49A6-92A4-3A8386E106CC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43007479-0D82-49A6-92A4-3A8386E106CC}.Release|x64.ActiveCfg = Release|Any CPU
 		{43007479-0D82-49A6-92A4-3A8386E106CC}.Release|x64.Build.0 = Release|Any CPU
 		{43007479-0D82-49A6-92A4-3A8386E106CC}.Release|x86.ActiveCfg = Release|Any CPU
@@ -209,7 +204,6 @@ Global
 		{E15910D6-F465-4E85-A135-D1986A953F36}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{E15910D6-F465-4E85-A135-D1986A953F36}.Debug|x86.Build.0 = Debug|Any CPU
 		{E15910D6-F465-4E85-A135-D1986A953F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E15910D6-F465-4E85-A135-D1986A953F36}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E15910D6-F465-4E85-A135-D1986A953F36}.Release|x64.ActiveCfg = Release|Any CPU
 		{E15910D6-F465-4E85-A135-D1986A953F36}.Release|x64.Build.0 = Release|Any CPU
 		{E15910D6-F465-4E85-A135-D1986A953F36}.Release|x86.ActiveCfg = Release|Any CPU
