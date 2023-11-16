@@ -58,7 +58,6 @@ namespace DiabloInterface.Plugin.HttpClient
             "Defense",
             "VelocityPercent",
             "AttackRating",
-            "AllQuestsDetails",
         };
 
         public string Event { get; private set; }
