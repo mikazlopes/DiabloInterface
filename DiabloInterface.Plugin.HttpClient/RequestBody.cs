@@ -56,7 +56,6 @@ namespace DiabloInterface.Plugin.HttpClient
             "MagicFind",
             "DamageMax",
             "Defense",
-            "VelocityPercent",
             "AttackRating",
         };
 
